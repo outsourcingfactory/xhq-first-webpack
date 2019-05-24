@@ -6,9 +6,6 @@ const webpack = require('webpack'); //用于访问内置插件
 console.log('xhq path ==>',process.argv);
 let bulidtype=process.argv.slice(2)[0]; //拿到当前的生产环境 从package.json 读取
 let devMode=true;
-if(bulidtype=='production'){
-	devMode=false;
-}
 function resolve(dir){
 	return path.join(__dirname,dir)
 }
@@ -41,7 +38,7 @@ const config = {
 			{
 				test: /\.css$/,
 				use: [
-					devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+					(process.env.NODE_ENV=='development') ? 'style-loader' : MiniCssExtractPlugin.loader,
 					'css-loader',
 					'postcss-loader'   //识别css  生产环境压缩提取css
 				]
@@ -76,7 +73,9 @@ const config = {
 			title:"webpack app",
 			template: "index.html",
 			filename: "index.html",   //html 压缩
-			inject: true
+			inject: true,
+			hash:true,
+			chunksSortMode: "none" //这里有个坑 最好把chunkSortMode 这个现象设为none
 		}),
 	]
 };
