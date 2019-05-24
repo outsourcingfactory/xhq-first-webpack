@@ -15,7 +15,7 @@ const devWebpackConfig=merge(baseWebpackConfig,{
         compress: true,  //一切服务启用gzip 压缩
         hot: true,
         inline:false,  //这个是开启浏览器的显示  默认为true  不开启
-        host:'10.10.10.3',
+        host:'localhost',
         port:9000,
         open:true, //是否自动打开浏览器
         overlay: {
