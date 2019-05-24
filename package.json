@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.conf.js",
     "build": "webpack --config webpack.prod.conf.js",
-    "dev": "webpack-dev-server --config webpack.dev.conf.js"
+    "dev": "npm run start"
   },
   "keywords": [
     "test"
