@@ -17,12 +17,13 @@ const config = {
 	],  //入口文件
 	output:{
 		path:path.resolve(__dirname,'dist'),
-		filename:'[name][hash].js'
+		filename:'[name].[hash].js'
 	},
     resolve: {
 	  extensions:['.js'],
 	  alias:{
-        '@':resolve('src')
+        '@':resolve('src'),
+	    'css':resolve('src/css')
 	  }
     },
 
@@ -36,7 +37,7 @@ const config = {
 				}
 			},
 			{
-				test: /\.css$/,
+				test: /\.(css|scss)$/,
 				use: [
 					(process.env.NODE_ENV=='development') ? 'style-loader' : MiniCssExtractPlugin.loader,
 					'css-loader',
@@ -65,9 +66,9 @@ const config = {
 	},
 	plugins:[
 		new MiniCssExtractPlugin({
-			filename: "[name].css",
+			filname:"[name].[hash:8].css",
 			chunkFilename: "[id].css"   //提取css
-		}),
+		}),//这里还是要提醒一下，如果只有一个入口filename写不写硬编码都没关系，因为就只有一个入口，但如果有多个入口，那就不能使用硬编码了，不然后面入口生成的css文件会覆盖前面生成的。这是我之前在extract-text-webpack-plugin踩过的坑。
 		new CleanWebpackPlugin(),  //打包清理dist 文件
 		new HtmlWebpackPlugin({  //该插件功能是打包js入口文件时，以该html作为模板，将打包后的js插入该模板，将html文件输出到输出目录中
 			title:"webpack app",
