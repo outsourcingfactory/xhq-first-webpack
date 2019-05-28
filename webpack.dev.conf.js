@@ -11,7 +11,7 @@ const devWebpackConfig=merge(baseWebpackConfig,{
     cache: true,//开发环境下默认启用cache，在内存中对已经构建的部分进行缓存
     devServer:{     //在development 环境使用
         clientLogLevel: 'warning',
-        contentBase:'./dist',
+        contentBase:'./dist', //这个是webpack-dev-server 的内存里的路劲
         publicPath:'/',
         compress: true,  //一切服务启用gzip 压缩
         hot: true,
@@ -25,7 +25,6 @@ const devWebpackConfig=merge(baseWebpackConfig,{
         proxy:{   //代理
 
         },
-        // filename:'index.js',
         progress:true, //将进入输出到控制台
         historyApiFallback: true,  //允许热更新时 解决history路径的刷新失败
         quiet:true  //启用 quiet 后，除了初始启动信息之外的任何内容都不会被打印到控制台。这也意味着来自 webpack 的错误或警告在控制台不可见。
@@ -47,7 +46,7 @@ const devWebpackConfig=merge(baseWebpackConfig,{
     }
 })
 
-//这里是把当前的host port 打印出来
+//这里是把当前的host port 打印出来  有一个插件webpackBar 可以比较优雅的写
 devWebpackConfig.plugins.push( new FriendlyErrorsPlugin({
     compilationSuccessInfo: {
         messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${devWebpackConfig.devServer.port}`],
