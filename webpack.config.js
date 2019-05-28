@@ -42,7 +42,7 @@ const config = {
 			},
 			{
 				test: /\.css$/,
-				use: [
+				use: [    //use 里可以写多个loader
 					(process.env.NODE_ENV=='development') ? 'style-loader' : MiniCssExtractPlugin.loader,
 					// MiniCssExtractPlugin.loader,
 					'css-loader',
@@ -55,8 +55,13 @@ const config = {
 					(process.env.NODE_ENV=='development') ? 'style-loader' : MiniCssExtractPlugin.loader,
 					'css-loader',
 					'postcss-loader',
-					'sass-loader'
-
+					'sass-loader',
+					{
+						loader: "sass-resources-loader",   //这里用的是sass-resources-loader 加载function.scss
+						options: {
+							resources:path.resolve(__dirname,'src/css/function.scss')
+						}
+					}
 				],
 			},
 			{
