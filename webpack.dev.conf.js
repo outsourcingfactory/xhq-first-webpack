@@ -3,6 +3,7 @@ const merge=require('webpack-merge');
 const webpack = require('webpack')
 const baseWebpackConfig = require('./webpack.config.js');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+const IP = require('./get-ip');
 
 
 
@@ -16,7 +17,7 @@ const devWebpackConfig=merge(baseWebpackConfig,{
         compress: true,  //一切服务启用gzip 压缩
         hot: true,
         inline:true,  //  默认为true  不开启
-        host:'localhost',
+        host:IP,
         port:9000,
         open:true, //是否自动打开浏览器
         overlay: {
